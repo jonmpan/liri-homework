@@ -49,23 +49,37 @@ var waiting = ()=>{
 //Help command
 var help = ()=>{
 	console.log(displayLines);	
-	console.log('My tweets based on specific username');
 	console.log('liri.js my-tweets "insert username in quotes here" 20');
+	console.log('');
+	console.log('My tweets based on specific username');	
 	console.log('20 specifies the number of results');
 	console.log('If no username, defaults to the creator of this app, tathecat563');
 	console.log(displayLines);
-	console.log('Searches Twitter for tweets with specific keywords');
 	console.log('liri.js search-tweets "insert search term in quotes here" 20');
+	console.log('');
+	console.log('Searches Twitter for tweets with specific keywords');
 	console.log('20 specifies the number of results');
 	console.log('If no search term, defaults to poop');
 	console.log(displayLines);
-	console.log('Stream tweets based on specific keywords');
 	console.log('liri.js stream-tweets "insert search term in quotes here"');
+	console.log('');
+	console.log('Stream tweets based on specific keywords');
 	console.log('If no search term, defaults to poop');
+	console.log('Press ctrl+c to stop the stream');
 	console.log(displayLines);
-	console.log('Searches Spotify based on song name');
 	console.log('liri.js spotify-this-song "insert search term in quotes here" 10');
+	console.log('');
+	console.log('Searches Spotify based on song name');
 	console.log('10 specifies the number of results');
+	console.log(displayLines);
+	console.log('liri.js movie-this "insert movie name in quotes here"');
+	console.log('');
+	console.log('Searches OMDB based on movie name');
+	console.log('Movie name must be an exact match to return the correct result');
+	console.log(displayLines);
+	console.log('liri.js do-what-it-says');
+	console.log('');
+	console.log('Make liri do something somewhat random');
 	console.log(displayLines);
 }
 //When the user inputs something that is not a command, execute this
