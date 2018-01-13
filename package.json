@@ -1,0 +1,17 @@
+{
+  "name": "liripackages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "commands.js",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
