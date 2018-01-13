@@ -86,7 +86,6 @@ var searchTweets = ()=>{
 				var twitterObject = tweets.statuses;
 				twitterObject.forEach(function(tweet){
 					console.log('#'+i+' By: '+tweet.user.name);
-					console.log('By: '+tweet.user.name);
 					console.log('On: '+tweet.user.created_at);
 					console.log('');
 					console.log(tweet.text);
