@@ -33,7 +33,7 @@ var setQuery = ()=>{
 			query = process.argv[3];
 		}
 		else{
-			query = 'rush hour';
+			query = 'mr.nobody';
 		}
 	}
 }
