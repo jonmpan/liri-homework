@@ -13,6 +13,14 @@ var setQuery = ()=>{
 			query = 'poop';
 		}
 	}
+	else if (command == 'say-this'){
+		if(process.argv[3]){
+			query = process.argv.splice(3).join(' ');
+		}
+		else{
+			query = 'poop';
+		}
+	}
 	else if (command == 'my-tweets'){
 		if(process.argv[3]){
 			query = process.argv[3];
@@ -87,6 +95,10 @@ var help = ()=>{
 	console.log('liri.js do-what-it-says');
 	console.log('');
 	console.log('Make liri do something somewhat random');
+	console.log(displayLines);
+	console.log('liri.js say-this "i like to say things"');
+	console.log('');
+	console.log('Makes liri say whatever you want it to say');
 	console.log(displayLines);
 }
 //When the user inputs something that is not a command, execute this
@@ -263,7 +275,17 @@ var doWhatItSays = ()=>{
 		else if(newCommand == 'movie-this'){
 			movieThis();
 		}
+		else if (newCommand == 'say-this'){
+			sayThis();
+		}
 	})
+}
+
+var sayThis = ()=>{
+	say.speak(query);
+	console.log(displayLines);
+	console.log(query);
+	console.log(displayLines);
 }
 //End Do What It Says
 //Export functions to liri.js
@@ -276,5 +298,6 @@ module.exports = {
 	streamTweets: streamTweets,
 	spotifyThisSong: spotifyThisSong,
 	movieThis: movieThis,
-	doWhatItSays: doWhatItSays
+	doWhatItSays: doWhatItSays,
+	sayThis: sayThis
 }

@@ -9,7 +9,7 @@ module.exports = command;
 var commands = require('./commands.js');
 
 //Sets query based on if the user inputted a search query. Use switch and helper method to refactor(?)
-if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-tweets' || command == 'spotify-this-song' || command == 'movie-this' || command == 'read-tweet'){
+if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-tweets' || command == 'spotify-this-song' || command == 'movie-this' || command == 'read-tweet' || command == 'say-this'){
 	commands.setQuery();
 	if(command == 'read-tweet'){
 		count = 1;
@@ -17,7 +17,7 @@ if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-t
 }
 
 //Sets count if the user inputs a number after their search query
-if (process.argv[4] && command != 'read-tweet'){
+if (process.argv[4] && command != 'read-tweet' && command != 'say-this'){
 	count = process.argv[4];
 }
 else {
@@ -53,6 +53,9 @@ else if(command == 'do-what-it-says'){
 }
 else if(command == '-help'){
 	commands.help();
+}
+else if(command == 'say-this'){
+	commands.sayThis();
 }
 else{
 	commands.notACommand();
