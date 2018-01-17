@@ -9,8 +9,11 @@ module.exports = command;
 var commands = require('./commands.js');
 
 //Sets query based on if the user inputted a search query. Use switch and helper method to refactor(?)
-if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-tweets' || command == 'spotify-this-song' || command == 'movie-this'){
-commands.setQuery();
+if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-tweets' || command == 'spotify-this-song' || command == 'movie-this' || command == 'read-tweet'){
+	commands.setQuery();
+	if(command == 'read-tweet'){
+		count = 1;
+	}
 }
 
 //Sets count if the user inputs a number after their search query
@@ -28,6 +31,9 @@ else {
 
 //Executes Command. Use switch to refactor
 if(command == 'search-tweets'){
+	commands.searchTweets();
+}
+else if(command == 'read-tweet'){
 	commands.searchTweets();
 }
 else if(command == 'my-tweets'){

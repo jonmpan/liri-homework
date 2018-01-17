@@ -2,9 +2,10 @@
 //Twitter API call
 var Twitter = require('twitter');
 var client = new Twitter(require('./key.js').twitterKeys);
+var say = require('say');
 //Sets Query for everything except for Do What It Says
 var setQuery = ()=>{
-	if (command == 'search-tweets' || command == 'stream-tweets'){
+	if (command == 'search-tweets' || command == 'stream-tweets' || command == 'read-tweet'){
 		if(process.argv[3]){
 			query = process.argv[3];
 		}
@@ -61,6 +62,12 @@ var help = ()=>{
 	console.log('20 specifies the number of results');
 	console.log('If no search term, defaults to poop');
 	console.log(displayLines);
+	console.log('liri.js read-tweets "insert search term in quotes here"');
+	console.log('');
+	console.log('Searches Twitter for 1 tweet and then Liri reads it to you');
+	console.log('20 specifies the number of results');
+	console.log('If no search term, defaults to poop');
+	console.log(displayLines);	
 	console.log('liri.js stream-tweets "insert search term in quotes here"');
 	console.log('');
 	console.log('Stream tweets based on specific keywords');
@@ -88,7 +95,8 @@ var notACommand = ()=>{
 	console.log(displayLines);
 	console.log('"'+command+'" is not a command.');
 	console.log('For a list of commands, use liri.js -help');
-	console.log(displayLines);	
+	console.log(displayLines);
+	say.speak('wub a lubb a dub dub, shoe wop do wop plippity plop poopity peep shoopity shmippity bippity boop, get shwifty');
 }
 //Using promises for search tweets and my tweets
 var searchTweets = ()=>{
@@ -105,8 +113,11 @@ var searchTweets = ()=>{
 					console.log(tweet.text);
 					console.log(displayLines);
 					i++;
+					if(command == 'read-tweet'){
+						say.speak(tweet.text);
+					}
+		  		})
 		  })
-	})
 	.catch(function(error){
 		console.log(error);
 	});
@@ -235,6 +246,11 @@ var doWhatItSays = ()=>{
 		}
 		else if(newCommand == 'search-tweets'){
 			count = 20;
+			searchTweets();
+		}
+		else if(newCommand == 'read-tweet'){
+			count = 1;
+			command = 'read-tweet';
 			searchTweets();
 		}
 		else if(newCommand == 'stream-tweets'){
