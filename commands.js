@@ -39,7 +39,7 @@ var setQuery = ()=>{
 	}
 	else if(command == 'movie-this'){
 		if(process.argv[3]){
-			query = process.argv[3];
+			query = process.argv.splice(3).join(' ');
 		}
 		else{
 			query = 'mr.nobody';
@@ -135,6 +135,23 @@ var searchTweets = ()=>{
 	});
 }
 
+var readTweet = ()=>{
+	var payload = {q: query, count: 1};
+	client.get('search/tweets', payload)
+		  .then(function(tweets){
+				waiting();
+				var twitterObject = tweets.statuses[0];
+				console.log('By: '+twitterObject.user.name);
+				console.log('On: '+twitterObject.user.created_at);
+				console.log('');
+				query = twitterObject.text;
+				sayThis();
+		  })
+	.catch(function(error){
+		console.log(error);
+	});
+}
+
 var myTweets = ()=>{
 	var payload = {screen_name: query, count: count};
 	client.get('statuses/user_timeline', payload)
@@ -209,17 +226,13 @@ var movieThis = ()=>{
 				console.log("Title: "+movieData.Title);
 				console.log("Year: "+movieData.Year);
 				console.log("IMDB Rating: " +movieData.imdbRating);
-				//Many Movies do not have a Rotten Tomato rating, this hopefully addresses that
+				//Console Logs all the movie's ratings
 				movieData.Ratings.forEach(function(data){
-					var z = 0;
 					if(data.Source){
 						console.log(data.Source+" Rating: "+data.Value);
 					}
 					else{
-						z++;
-						if(z == movieData.Ratings.length){
-							console.log("No Ratings");
-						}
+						console.log("No Ratings");
 					}
 				})
 				//Logs the movie's data
@@ -281,11 +294,46 @@ var doWhatItSays = ()=>{
 	})
 }
 
+// Allows the user to press esc or ctrl+c to stop the speaking
+var keypress = require('keypress');
+var say = require('say');
+
+
+var randomTrumpQuote = ()=>{
+	fs.readFile('randomtrumpquote.txt', 'utf8', (err, data)=>{
+		if (err) throw err;
+		var randomThings = data.split(';');
+		var random = Math.floor(Math.random()*randomThings.length);
+		var randomThing = JSON.parse(randomThings[random]);
+		// console.log(randomThing);
+		console.log(displayLines);
+		console.log(randomThing.context);
+		query = randomThing.quote;
+		sayThis();
+	})
+}
+
 var sayThis = ()=>{
 	say.speak(query);
-	console.log(displayLines);
+	if(command != 'read-tweet'){
+		console.log(displayLines);
+	}
 	console.log(query);
 	console.log(displayLines);
+	console.log('Press ESCAPE or CTRL+C or UP-ARROW to exit');
+	console.log(displayLines);
+	// make `process.stdin` begin emitting "keypress" events 
+	keypress(process.stdin);
+	// listen for the "keypress" event
+	process.stdin.on('keypress', function (ch, key) {
+	// console.log('got "keypress"', key);
+		if (key && key.ctrl && key.name == 'c' || key.name == 'escape' || key.name == 'up') {
+			say.stop();
+			process.stdin.pause();
+		}
+	});
+	process.stdin.setRawMode(true);
+	process.stdin.resume();
 }
 //End Do What It Says
 //Export functions to liri.js
@@ -294,10 +342,12 @@ module.exports = {
 	help: help,
 	notACommand: notACommand,
 	searchTweets: searchTweets,
+	readTweet: readTweet,
 	myTweets: myTweets,
 	streamTweets: streamTweets,
 	spotifyThisSong: spotifyThisSong,
 	movieThis: movieThis,
 	doWhatItSays: doWhatItSays,
+	randomTrumpQuote: randomTrumpQuote,
 	sayThis: sayThis
 }

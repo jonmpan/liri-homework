@@ -34,7 +34,7 @@ if(command == 'search-tweets'){
 	commands.searchTweets();
 }
 else if(command == 'read-tweet'){
-	commands.searchTweets();
+	commands.readTweet();
 }
 else if(command == 'my-tweets'){
 	commands.myTweets();
@@ -57,6 +57,10 @@ else if(command == '-help'){
 else if(command == 'say-this'){
 	commands.sayThis();
 }
+else if(command == 'random-trump-quote'){
+	commands.randomTrumpQuote();
+}
 else{
 	commands.notACommand();
 }
+
