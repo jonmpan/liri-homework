@@ -17,7 +17,7 @@ if (command == 'search-tweets' || command == 'stream-tweets' || command == 'my-t
 }
 
 //Sets count if the user inputs a number after their search query
-if (process.argv[4]){
+if (process.argv[4] && command != 'read-tweet'){
 	count = process.argv[4];
 }
 else {

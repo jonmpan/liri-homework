@@ -96,7 +96,7 @@ var notACommand = ()=>{
 	console.log('"'+command+'" is not a command.');
 	console.log('For a list of commands, use liri.js -help');
 	console.log(displayLines);
-	say.speak('wub a lubb a dub dub, shoe wop do wop plippity plop poopity peep shoopity shmippity bippity boop, get shwifty');
+	say.speak('wub a lubb a dub dub, shoe wop do wop plippity plop poopity peep shoopity shmippity bippity boop everrrrrrrrrrrrrrrrrrrrrrrrr nerdidodedadudidydedadudodudodudodudodudidididididideded, get shwifty');
 }
 //Using promises for search tweets and my tweets
 var searchTweets = ()=>{
