@@ -62,7 +62,7 @@ var help = ()=>{
 	console.log('20 specifies the number of results');
 	console.log('If no search term, defaults to poop');
 	console.log(displayLines);
-	console.log('liri.js read-tweets "insert search term in quotes here"');
+	console.log('liri.js read-tweet "insert search term in quotes here"');
 	console.log('');
 	console.log('Searches Twitter for 1 tweet and then Liri reads it to you');
 	console.log('20 specifies the number of results');
